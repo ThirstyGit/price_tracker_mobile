@@ -3,15 +3,15 @@ import { StyleSheet, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
 // Importing user components.
-import FormInput from '../components/FormInput';
-import CustomButton from '../components/CustomButton';
-import CustomRevertButton from '../components/CustomRevertButton';
-import FormMessage from '../components/FormMessage';
+import FormInput from "../components/FormInput";
+import CustomButton from "../components/CustomButton";
+import CustomRevertButton from "../components/CustomRevertButton";
+import FormMessage from "../components/FormMessage";
 
 // Importing necessary datas.
 import colors from "../config/colors";
 
-function SignupScreen() {
+function SigninScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.legend}>SIGN IN</Text>
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   messageMargin: {
     marginBottom: 15,
-  }
+  },
 });
 
-export default SignupScreen;
+export default SigninScreen;

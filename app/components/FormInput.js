@@ -3,7 +3,8 @@ import React from 'react';
 import { StyleSheet, TextInput } from "react-native";
 
 // Importing necessary data.
-import sizes from '../config/sizes'
+import sizes from '../config/sizes';
+import colors from '../config/colors';
 
 
 function FormInput({ placeholder, autoFocus, secureTextEntry }) {
@@ -19,7 +20,7 @@ function FormInput({ placeholder, autoFocus, secureTextEntry }) {
 
 const styles = StyleSheet.create({
   textInput: {
-    backgroundColor: "#f0f0f0",
+    backgroundColor: colors.whitePrimary,
     fontSize: 25,
     borderRadius: 30,
     color: "black",
