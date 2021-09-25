@@ -1,5 +1,5 @@
 // Importis
-import React from 'react';
+import React from "react";
 import { StyleSheet, Pressable, Text } from "react-native";
 
 // Importing necessary datas.
@@ -9,22 +9,23 @@ import sizes from "../config/sizes";
 function CustomButton({ children }) {
   return (
     <Pressable style={styles.button}>
-      <Text style={styles.buttonText}>{ children }</Text>
+      <Text style={styles.buttonText}>{children}</Text>
     </Pressable>
   );
 }
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: colors.primary,
     padding: 5,
+    borderWidth: 3,
+    borderColor: colors.primary,
     borderRadius: 30,
     width: sizes.FormInputWidth,
     alignItems: "center",
     marginBottom: 15,
   },
   buttonText: {
-    color: "white",
+    color: colors.primary,
     fontSize: 30,
   },
 });
