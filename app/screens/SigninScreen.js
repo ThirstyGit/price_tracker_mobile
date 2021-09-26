@@ -46,7 +46,7 @@ function SigninScreen() {
     else {
       // If the data is correct, send it.
       setMessage("");
-      fetch("https://sadlab.herokuapp.com/auth/login", {
+      fetch("https://englab.herokuapp.com/auth/login", {
         method: "POST",
         credentials: "include",
         body: JSON.stringify({
@@ -60,7 +60,6 @@ function SigninScreen() {
       })
       .then(res => {
         if(!res.url.includes('login')) {
-          console.log('Logged In');
           reduxFunctions.login("logged in");
         }
         else {
