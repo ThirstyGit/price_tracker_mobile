@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { bindActionCreators } from "redux";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { StyleSheet, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
@@ -10,7 +10,6 @@ import { login, logout } from '../store/actions';
 // Importing user components.
 import FormInput from "../components/FormInput";
 import CustomButton from "../components/CustomButton";
-import CustomRevertButton from "../components/CustomRevertButton";
 import FormMessage from "../components/FormMessage";
 
 // Importing necessary datas.
@@ -32,7 +31,6 @@ function SigninScreen() {
   }
 
   // redux.
-  const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const reduxFunctions = bindActionCreators({ login, logout }, dispatch);
 
@@ -70,20 +68,15 @@ function SigninScreen() {
         }
       })
       .catch(err => {
-        setMessage("There was an erro.");
+        setMessage("There was an error.");
       });
     }
   }
 
   return (
-    auth.token ? 
-    <View style={styles.container}>
-      <Text>Logged In</Text>
-    </View>
-     :
     <View style={styles.container}>
       <Text style={styles.legend}>SIGN IN</Text>
-      <FormMessage style={styles.messageMargin} message={message}></FormMessage>
+      <FormMessage style={styles.messageMargin} type="warning" message={message}></FormMessage>
       <FormInput
         placeholder="Email"
         autoFocus={true}
@@ -95,7 +88,6 @@ function SigninScreen() {
         onChangeText={passwordState}
       />
       <CustomButton onPress={signin}>Sign In</CustomButton>
-      <CustomRevertButton>Sign Up</CustomRevertButton>
       <StatusBar style="auto" />
     </View>
   );

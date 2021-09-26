@@ -5,7 +5,6 @@ import { StatusBar } from "expo-status-bar";
 // Importing user components.
 import FormInput from '../components/FormInput';
 import CustomButton from '../components/CustomButton';
-import CustomRevertButton from '../components/CustomRevertButton';
 import FormMessage from '../components/FormMessage';
 
 // Importing necessary datas.
@@ -14,6 +13,7 @@ import colors from "../config/colors";
 function SignupScreen() {
   // Setting up state.
   let [message, setMessage] = useState("");
+  let [type, setType] = useState("warning");
   let [username, setUsername] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
@@ -58,7 +58,6 @@ function SignupScreen() {
     }
     else {
       // If the data is correct, send it.
-      setMessage("");
       fetch("https://sadlab.herokuapp.com/auth/register", {
         method: "POST",
         credentials: "include",
@@ -71,14 +70,31 @@ function SignupScreen() {
           "Content-type": "application/json; charset=UTF-8",
           Accept: "*/*",
         },
-      });
+      })
+        .then((res) => {
+          setType('warning');
+          if (res.url.includes("login")) {
+            setType('');
+            setMessage("Account Created!");
+          }
+          else {
+            setMessage("Account Already exists!");
+          }
+        })
+        .catch((err) => {
+          setMessage("There was an error.");
+        });
     }
   }
 
   return (
     <View style={styles.container}>
       <Text style={styles.legend}>SIGN UP</Text>
-      <FormMessage style={styles.messageMargin} message={message}></FormMessage>
+      <FormMessage
+        style={styles.messageMargin}
+        type={type}
+        message={message}
+      ></FormMessage>
       <FormInput
         placeholder="Username"
         autoFocus={true}
@@ -96,7 +112,6 @@ function SignupScreen() {
         onChangeText={confirmPasswordState}
       />
       <CustomButton onPress={signup}>Sign Up</CustomButton>
-      <CustomRevertButton>Sign In</CustomRevertButton>
       <StatusBar style="auto" />
     </View>
   );
