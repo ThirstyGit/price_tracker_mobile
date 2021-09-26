@@ -5,13 +5,12 @@ import { Text } from "react-native";
 // importing user defined components.
 import Screen from "../components/Screen";
 
-
-function ProductScreen() {
+function UserScreen() {
   return (
     <Screen>
-      <Text>This is the page for a single product.</Text>
+      <Text>Users information will be shown here.</Text>
     </Screen>
   );
 }
 
-export default ProductScreen;
+export default UserScreen;
