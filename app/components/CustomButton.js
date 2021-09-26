@@ -6,9 +6,9 @@ import { StyleSheet, Pressable, Text } from "react-native";
 import colors from "../config/colors";
 import sizes from "../config/sizes";
 
-function CustomButton({ children }) {
+function CustomButton({ children, onPress }) {
   return (
-    <Pressable style={styles.button}>
+    <Pressable style={styles.button} onPress={onPress}>
       <Text style={styles.buttonText}>{ children }</Text>
     </Pressable>
   );

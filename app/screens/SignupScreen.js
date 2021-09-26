@@ -19,7 +19,7 @@ function SignupScreen() {
         Error Message Goes Here.
       </FormMessage>
       <FormInput placeholder="Username" autoFocus={true} />
-      <FormInput placeholder="Email" autoFocus={true} />
+      <FormInput placeholder="Email" />
       <FormInput placeholder="Password" secureTextEntry={true} />
       <FormInput placeholder="New Password" secureTextEntry={true} />
       <CustomButton>Sign Up</CustomButton>

@@ -1,6 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import { bindActionCreators } from "redux";
+import { useSelector, useDispatch } from "react-redux";
 import { StyleSheet, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
+
+// Importing redux actions.
+import { login, logout } from '../store/actions';
 
 // Importing user components.
 import FormInput from "../components/FormInput";
@@ -12,6 +17,11 @@ import FormMessage from "../components/FormMessage";
 import colors from "../config/colors";
 
 function SigninScreen() {
+  // redux.
+  const auth = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const reduxFunctions = bindActionCreators({ login, logout }, dispatch);
+
   return (
     <View style={styles.container}>
       <Text style={styles.legend}>SIGN IN</Text>
