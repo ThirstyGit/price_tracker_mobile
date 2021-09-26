@@ -11,7 +11,7 @@ const tempSource =
 
 
 
-function ProductListScreen() {
+function ProductListScreen({ navigation }) {
   // Setting states.
   let [products, setProducts] = useState("");
 
@@ -31,6 +31,7 @@ function ProductListScreen() {
             imgSrc={item.image}
             name={item.name}
             price={item.price_history[item.price_history.length - 1].price}
+            onPress={() => navigation.navigate("Product Screen", item)}
           />
         )}
       />
