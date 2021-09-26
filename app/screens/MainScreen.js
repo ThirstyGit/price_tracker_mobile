@@ -4,20 +4,22 @@ import { useSelector } from "react-redux";
 import { createStackNavigator } from '@react-navigation/stack'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { NavigationContainer } from '@react-navigation/native';
-import { FontAwesome5, FontAwesome } from "@expo/vector-icons";
+import { FontAwesome5, FontAwesome, Entypo } from "@expo/vector-icons";
 
 // importing users screens.
 import UserScreen from './UserScreen';
 import ProductScreen from './ProductScreen';
 import ProductListScreen from './ProductListScreen';
 import SigninScreen from './SigninScreen';
+import SignupScreen from './SignupScreen';
 
 // Importing necessary data.
 import colors from '../config/colors';
 
 // Our navigator.
-// Tab Navigator implementation.
+// Tab Navigation.
 const Tab = createBottomTabNavigator();
+// Tab Navigator implementation for products.
 const TabNavigator = () => {
   return (
     <Tab.Navigator
@@ -35,7 +37,7 @@ const TabNavigator = () => {
         options={{
           headerShown: false,
           tabBarIcon: ({ color }) => (
-            <FontAwesome name="shopping-basket" size={24} color={color} />
+            <FontAwesome name="shopping-basket" size={30} color={color} />
           ),
         }}
       />
@@ -45,6 +47,40 @@ const TabNavigator = () => {
         options={{
           tabBarIcon: ({ color }) => (
             <FontAwesome5 name="user" size={30} color={color} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
+// Tab Navigator implementation for Auth.
+const UserNavigator = () => {
+  return (
+    <Tab.Navigator
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: colors.primary,
+        },
+        headerShown: false,
+        headerTintColor: colors.whitePrimary,
+        tabBarActiveTintColor: colors.primary,
+      }}
+    >
+      <Tab.Screen
+        name="Sign In"
+        component={SigninScreen}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Entypo name="key" size={30} color={color} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Sign Up"
+        component={SignupScreen}
+        options={{
+          tabBarIcon: ({ color }) => (
+            <Entypo name="plus" size={30} color={color} />
           ),
         }}
       />
@@ -79,6 +115,8 @@ export default function MainScreen() {
       <TabNavigator />
     </NavigationContainer>
   ) : (
-    <SigninScreen />
+    <NavigationContainer>
+      <UserNavigator />
+    </NavigationContainer>
   );
 }

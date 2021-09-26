@@ -10,7 +10,6 @@ import { login, logout } from '../store/actions';
 // Importing user components.
 import FormInput from "../components/FormInput";
 import CustomButton from "../components/CustomButton";
-import CustomRevertButton from "../components/CustomRevertButton";
 import FormMessage from "../components/FormMessage";
 
 // Importing necessary datas.
@@ -69,7 +68,7 @@ function SigninScreen() {
         }
       })
       .catch(err => {
-        setMessage("There was an erro.");
+        setMessage("There was an error.");
       });
     }
   }
@@ -77,7 +76,7 @@ function SigninScreen() {
   return (
     <View style={styles.container}>
       <Text style={styles.legend}>SIGN IN</Text>
-      <FormMessage style={styles.messageMargin} message={message}></FormMessage>
+      <FormMessage style={styles.messageMargin} type="warning" message={message}></FormMessage>
       <FormInput
         placeholder="Email"
         autoFocus={true}
@@ -89,7 +88,6 @@ function SigninScreen() {
         onChangeText={passwordState}
       />
       <CustomButton onPress={signin}>Sign In</CustomButton>
-      <CustomRevertButton>Sign Up</CustomRevertButton>
       <StatusBar style="auto" />
     </View>
   );
