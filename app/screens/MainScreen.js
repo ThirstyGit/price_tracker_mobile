@@ -110,7 +110,7 @@ export default function MainScreen() {
   // Redux
   const auth = useSelector((state) => state.auth);
   
-  return !auth.token ? (
+  return auth.token ? (
     <NavigationContainer>
       <TabNavigator />
     </NavigationContainer>
