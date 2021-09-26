@@ -6,15 +6,15 @@ import { Text, StyleSheet } from 'react-native';
 import colors from "../config/colors";
 import sizes from "../config/sizes";
 
-function FormMessage({ children, visible, style }) {
-  if(visible) {
+function FormMessage({ visible, style, message }) {
+  if(message) {
     visible = styles.visible;
   }
   else {
     visible = styles.invisible;
   }
   return (
-    <Text style={{ ...styles.message, ...style, ...visible }}>{children}</Text>
+    <Text style={{ ...styles.message, ...style, ...visible }}>{message}</Text>
   );
 }
 
@@ -31,6 +31,7 @@ const styles = StyleSheet.create({
     paddingBottom: 5,
     paddingLeft: 15,
     paddingRight: 15,
+    overflow: 'hidden'
   },
   visible: {
     display: "flex",

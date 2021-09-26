@@ -13,6 +13,7 @@ import colors from "../config/colors";
 
 function SignupScreen() {
   // Setting up state.
+  let [message, setMessage] = useState("");
   let [username, setUsername] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
@@ -37,15 +38,47 @@ function SignupScreen() {
 
   // functions.
   function signup() {
-    console.log(username, email, password, confirmPassword);
+    // Validation form.
+    if (username.length < 4) {
+      setMessage("Username is too short!");
+    }
+    else if (!email.match(/(^.+@.+\.com$)/)) {
+      setMessage("Please give a valid email.");
+    }
+    else if (
+      !password.match(/(?=.*[a-z])(?=.*[0-9])(?=.*[A-Z])(.{8})/)
+    )
+    {
+      setMessage(
+        "Password must be minimum length 8 and contain smaller case, lower case, numbers."
+      );
+    }
+    else if (password != confirmPassword) {
+      setMessage("Passwords don't match");
+    }
+    else {
+      // If the data is correct, send it.
+      setMessage("");
+      fetch("https://sadlab.herokuapp.com/auth/register", {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify({
+          name: username,
+          email,
+          password,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Accept: "*/*",
+        },
+      });
+    }
   }
 
   return (
     <View style={styles.container}>
       <Text style={styles.legend}>SIGN UP</Text>
-      <FormMessage style={styles.messageMargin}>
-        Error Message Goes Here.
-      </FormMessage>
+      <FormMessage style={styles.messageMargin} message={message}></FormMessage>
       <FormInput
         placeholder="Username"
         autoFocus={true}
