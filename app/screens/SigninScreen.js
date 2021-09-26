@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { bindActionCreators } from "redux";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { StyleSheet, Text, View } from "react-native";
 import { StatusBar } from "expo-status-bar";
 
@@ -32,7 +32,6 @@ function SigninScreen() {
   }
 
   // redux.
-  const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const reduxFunctions = bindActionCreators({ login, logout }, dispatch);
 
@@ -76,11 +75,6 @@ function SigninScreen() {
   }
 
   return (
-    auth.token ? 
-    <View style={styles.container}>
-      <Text>Logged In</Text>
-    </View>
-     :
     <View style={styles.container}>
       <Text style={styles.legend}>SIGN IN</Text>
       <FormMessage style={styles.messageMargin} message={message}></FormMessage>
