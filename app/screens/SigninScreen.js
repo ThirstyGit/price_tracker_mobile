@@ -17,10 +17,28 @@ import FormMessage from "../components/FormMessage";
 import colors from "../config/colors";
 
 function SigninScreen() {
+  // Setting up state.
+  let [email, setEmail] = useState("");
+  let [password, setPassword] = useState("");
+
+  // Functions for form state management.
+  function emailState(email) {
+    setEmail(email);
+  }
+
+  function passwordState(password) {
+    setPassword(password);
+  }
+
   // redux.
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
   const reduxFunctions = bindActionCreators({ login, logout }, dispatch);
+
+  // functions.
+  function signin() {
+    console.log(email, password);
+  }
 
   return (
     <View style={styles.container}>
@@ -28,9 +46,17 @@ function SigninScreen() {
       <FormMessage style={styles.messageMargin}>
         Wrong Email or Password.
       </FormMessage>
-      <FormInput placeholder="Email" autoFocus={true} />
-      <FormInput placeholder="Password" secureTextEntry={true} />
-      <CustomButton>Sign In</CustomButton>
+      <FormInput
+        placeholder="Email"
+        autoFocus={true}
+        onChangeText={emailState}
+      />
+      <FormInput
+        placeholder="Password"
+        secureTextEntry={true}
+        onChangeText={passwordState}
+      />
+      <CustomButton onPress={signin}>Sign In</CustomButton>
       <CustomRevertButton>Sign Up</CustomRevertButton>
       <StatusBar style="auto" />
     </View>

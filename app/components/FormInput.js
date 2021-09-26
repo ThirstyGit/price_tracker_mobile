@@ -7,13 +7,14 @@ import sizes from '../config/sizes';
 import colors from '../config/colors';
 
 
-function FormInput({ placeholder, autoFocus, secureTextEntry }) {
+function FormInput({ placeholder, autoFocus, secureTextEntry, onChangeText }) {
   return (
     <TextInput
       style={styles.textInput}
       placeholder={placeholder}
       autoFocus={autoFocus}
       secureTextEntry={secureTextEntry}
+      onChangeText={onChangeText}
     />
   );
 }
