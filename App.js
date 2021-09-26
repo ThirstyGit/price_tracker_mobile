@@ -1,58 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Pressable, TextInput } from 'react-native';
+import { useSelector } from "react-redux";
+import { createStore, applyMiddleware } from "redux";
+import thunk from 'redux-thunk';
+import { Provider } from 'react-redux';
 
-function buttonEvent() {
-  console.log('Clicked!');
-}
+// Importing user defined modules.
+import reducers from "./app/store/reducers";
+// importing screens.
+import SigninScreen from './app/screens/SigninScreen';
+
+// Creating the redux store.
+const store = createStore(reducers, {}, applyMiddleware(thunk));
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.legend}>SIGN IN</Text>
-      <TextInput style={styles.textInput} placeholder="Email"/>
-      <TextInput style={styles.textInput} placeholder="Password"/>
-      <Pressable style={styles.button} onPress={buttonEvent}>
-        <Text style={styles.buttonText}>SIGN IN</Text>
-      </Pressable>
-      <StatusBar style="auto" />
-    </View>
+    <Provider store={store}>
+      <SigninScreen />
+    </Provider>
   );
 }
-
-const FormInputWidth = "80%";
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  legend: {
-    fontSize: 30,
-    marginBottom: 30,
-    color: "hsl(174, 100%, 29%)",
-  },
-  button: {
-    backgroundColor: "hsl(174, 100%, 29%)",
-    padding: 5,
-    borderRadius: 30,
-    width: FormInputWidth,
-    alignItems: "center",
-  },
-  buttonText: {
-    color: "white",
-    fontSize: 30,
-  },
-  textInput: {
-    backgroundColor: "#f0f0f0",
-    fontSize: 25,
-    borderRadius: 30,
-    color: "black",
-    padding: 10,
-    paddingLeft: 20,
-    width: FormInputWidth,
-    marginBottom: 15,
-  },
-});
