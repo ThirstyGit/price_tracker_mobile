@@ -18,6 +18,7 @@ import colors from "../config/colors";
 
 function SigninScreen() {
   // Setting up state.
+  let [message, setMessage] = useState("");
   let [email, setEmail] = useState("");
   let [password, setPassword] = useState("");
 
@@ -37,15 +38,52 @@ function SigninScreen() {
 
   // functions.
   function signin() {
-    console.log(email, password);
+    // Validation form.
+    if (!email.length) {
+      setMessage("Please give an email");
+    }
+    else if (!password.length) {
+      setMessage("Please give a password");
+    }
+    else {
+      // If the data is correct, send it.
+      setMessage("");
+      fetch("https://sadlab.herokuapp.com/auth/login", {
+        method: "POST",
+        credentials: "include",
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+        headers: {
+          "Content-type": "application/json; charset=UTF-8",
+          Accept: "*/*",
+        },
+      })
+      .then(res => {
+        if(!res.url.includes('login')) {
+          console.log('Logged In');
+          reduxFunctions.login("logged in");
+        }
+        else {
+          setMessage("Email or Password Invalid.");
+        }
+      })
+      .catch(err => {
+        setMessage("There was an erro.");
+      });
+    }
   }
 
   return (
+    auth.token ? 
+    <View style={styles.container}>
+      <Text>Logged In</Text>
+    </View>
+     :
     <View style={styles.container}>
       <Text style={styles.legend}>SIGN IN</Text>
-      <FormMessage style={styles.messageMargin}>
-        Wrong Email or Password.
-      </FormMessage>
+      <FormMessage style={styles.messageMargin} message={message}></FormMessage>
       <FormInput
         placeholder="Email"
         autoFocus={true}
