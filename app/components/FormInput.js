@@ -22,7 +22,7 @@ function FormInput({ placeholder, autoFocus, secureTextEntry, onChangeText }) {
 const styles = StyleSheet.create({
   textInput: {
     backgroundColor: colors.whitePrimary,
-    fontSize: 25,
+    fontSize: 20,
     borderRadius: 30,
     color: "black",
     padding: 10,

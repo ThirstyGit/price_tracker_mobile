@@ -109,7 +109,6 @@ const ProductNavigator = () => {
 export default function MainScreen() {
   // Redux
   const auth = useSelector((state) => state.auth);
-  
   return auth.token ? (
     <NavigationContainer>
       <TabNavigator />

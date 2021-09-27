@@ -58,7 +58,7 @@ function SignupScreen() {
     }
     else {
       // If the data is correct, send it.
-      fetch("https://sadlab.herokuapp.com/auth/register", {
+      fetch("https://englab.herokuapp.com/auth/register", {
         method: "POST",
         credentials: "include",
         body: JSON.stringify({
